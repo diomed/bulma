@@ -1,11 +1,17 @@
-$modal-z: 40 !default
+$modal-z: 20 !default
 
 $modal-background-background-color: rgba($black, 0.86) !default
 
 $modal-content-width: 640px !default
 $modal-content-margin-mobile: 20px !default
+$modal-content-margin-tablet: 20px !default
 $modal-content-spacing-mobile: 160px !default
 $modal-content-spacing-tablet: 40px !default
+
+$modal-content-width-small: 340px !default
+$modal-content-width-small-mobile: 280px !default
+$modal-content-width-large: 960px !default
+$modal-content-width-large: 960px !default
 
 $modal-close-dimensions: 40px !default
 $modal-close-right: 20px !default
@@ -29,10 +35,9 @@ $modal-card-body-background-color: $white !default
 $modal-card-body-padding: 20px !default
 
 .modal
-  @extend %overlay
+  +overlay
   align-items: center
   display: none
-  flex-direction: column
   justify-content: center
   overflow: hidden
   position: fixed
@@ -42,7 +47,7 @@ $modal-card-body-padding: 20px !default
     display: flex
 
 .modal-background
-  @extend %overlay
+  +overlay
   background-color: $modal-background-background-color
 
 .modal-content,
@@ -58,8 +63,16 @@ $modal-card-body-padding: 20px !default
     max-height: calc(100vh - #{$modal-content-spacing-tablet})
     width: $modal-content-width
 
+  &.is-small
+    width: $modal-content-width-small
+    +mobile
+      width: $modal-content-width-small-mobile
+  &.is-large
+    width: $modal-content-width-large
+    margin: 0 $modal-content-margin-tablet
+
 .modal-close
-  @extend %delete
+  +delete
   background: none
   height: $modal-close-dimensions
   position: fixed
@@ -72,7 +85,6 @@ $modal-card-body-padding: 20px !default
   flex-direction: column
   max-height: calc(100vh - #{$modal-card-spacing})
   overflow: hidden
-  -ms-overflow-y: visible
 
 .modal-card-head,
 .modal-card-foot
